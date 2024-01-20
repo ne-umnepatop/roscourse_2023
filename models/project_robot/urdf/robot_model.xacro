@@ -1,11 +1,12 @@
 <?xml version='1.0'?>
 <robot name="project_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-<xacro:include filename="$(find roscourse_2023_project_scene)/models/project_robot/urdf/materials.xacro" />
-<xacro:include filename="$(find roscourse_2023_project_scene)/models/project_robot/urdf/inertial.urdf.xacro" />
-<xacro:include filename="$(find roscourse_2023_project_scene)/models/project_robot/urdf/setup.gazebo" />
-<xacro:include filename="$(find roscourse_2023_project_scene)/models/project_robot/urdf/wheel.xacro" />
+<xacro:property name="pack" value="roscourse_2023_project_scene" />
 
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/materials.xacro" />
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/wheel.xacro" />
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/inertial.urdf.xacro" />
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/setup.gazebo" />
 
 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
 
@@ -26,7 +27,7 @@
             <material name="black"/>
         </visual>
         
-        <xacro:inertial_box mass="2" x="0.2" y="0.18" z="0.12" >
+        <xacro:inertial_box mass="10" x="0.2" y="0.18" z="0.12" >
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
 
