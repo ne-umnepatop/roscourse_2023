@@ -9,7 +9,7 @@
   
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
-  <arg name="rviz_conf_file" default="$(find my_robot_simulation_control)/urdf/rviz_conf.rviz" />
+  <arg name="rviz_conf_file" default="$(find roscourse_2023_project_scene)/urdf/rviz_conf.rviz" />
 
 
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
@@ -32,6 +32,7 @@
    args="-urdf -param robot_description -model my_diff_drive_robot -x $(arg x) -y $(arg y) -z $(arg z)" respawn="false"/>
 
 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf_file)" />
 
 
 </launch>

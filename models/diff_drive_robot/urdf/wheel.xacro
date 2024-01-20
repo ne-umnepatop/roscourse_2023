@@ -32,7 +32,7 @@
             <joint_properties damping="0.5" friction="0.1"/>
 
             <child link="wheel_${side}_link"/>
-            <parent link="base_link"/>
+            <parent link="base"/>
         </joint>
 
         <transmission name="wheel_${side}_trans">

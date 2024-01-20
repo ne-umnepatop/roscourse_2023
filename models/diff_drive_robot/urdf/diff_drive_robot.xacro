@@ -96,10 +96,6 @@
   <xacro:wheel side="down_left" x="0.1" y="-0.09" z="0.0" sign="1"/>
   <xacro:wheel side="down_right" x="0.1" y="-0.09" z="0.0" sign="-1"/> 
 
-  <joint type="fixed" name="camera_joint">
-    <origin xyz="0.3 0 0" rpy="0 0 0"/>
-    <child link="camera2"/>
-    <parent link="base"/>
-  </joint>
+
 
 </robot>
