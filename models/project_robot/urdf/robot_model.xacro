@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<robot name="cart_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<xacro:property name="side" value="right"/>
+
+<xacro:include filename="$(find my_robot_simulation_control)/urdf/materials.xacro" />
+<xacro:include filename="$(find my_robot_simulation_control)/urdf/wheel.xacro" />
+<xacro:include filename="$(find my_robot_simulation_control)/urdf/inertial.urdf.xacro" />
+<xacro:include filename="$(find my_robot_simulation_control)/urdf/setup.gazebo" />
+
+<!-- robot_arm BUT NOW cart_robot -->
+<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+
+    <link name="base_footprint"/>
+    <joint name="base_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.0102"/>
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+    </joint>
+
+    <link name='base_link'>
+
+        <visual name='base_visual'>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+        <box size="0.2 0.18 0.12 "/>
+        </geometry>
+        <material name="blue"/>
+        </visual>
+        
+        <xacro:inertial_box mass="2" x="0.2" y="0.18" z="0.12" >
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="0.2 0.18 0.12 "/>
+                </geometry>
+        </collision>
+
+    </link>
+
+    <link name='camera'>
+        <visual name='camera_visual'>
+        <origin xyz="0 0 0" rpy=" 0 0 1.570796"/>
+        <geometry>
+            <box size=".05 .05 .05"/>
+        </geometry>
+        <material name="red"/>
+        </visual>
+    </link>
+    
+    <joint type="fixed" name="camera_joint">
+        <origin xyz="0 0.10 0.10" rpy="0 0 1.570796"/>
+        <child link="camera"/>
+        <parent link="base_link"/>
+    </joint>
+
+    <link name="lidar">
+        <visual name='lidar_visual'>
+            <origin xyz="0 0 0" rpy=" 0 0 0"/>
+            <geometry>
+                <box size=".05 .05 .05"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+    <joint name="lidar_joint" type="fixed">
+        <origin xyz="0 0.10 0.20" rpy="0 0 1.570796"/>
+        <child link="lidar"/>
+        <parent link="base_link"/>
+    </joint>
+
+    <xacro:wheel side="up_left" x="0.1" y="0.09" z="0.0" sign="1"/> 
+    <xacro:wheel side="up_right" x="0.1" y="0.09" z="0.0" sign="-1"/>
+    
+    <xacro:wheel side="down_left" x="0.1" y="-0.09" z="0.0" sign="1"/>
+    <xacro:wheel side="down_right" x="0.1" y="-0.09" z="0.0" sign="-1"/> 
+    
+</robot>
