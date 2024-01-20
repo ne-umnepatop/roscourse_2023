@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 
-  <param name="robot_description" command="xacro '$(find roscourse_2023_project_scene)/models/diff_drive_robot/urdf/diff_drive_robot.xacro'"/>
+  <param name="robot_description" command="xacro '$(find roscourse_2023_project_scene)/models/project_robot/urdf/robot_model.xacro'"/>
   <!-- Robot pose -->
   <arg name="x" default="0"/>
   <arg name="y" default="0"/>
@@ -24,9 +24,15 @@
   </include>
 
 
-  <node name="diff_drive_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
-   args="-urdf -param robot_description -model my_diff_drive_robot -x $(arg x) -y $(arg y) -z $(arg z)" respawn="false"/>
+  <node name="my_robot_model_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+   args="-urdf -param robot_description -model my_robot_model -x $(arg x) -y $(arg y) -z $(arg z)" respawn="false"/>
 
+ <!--  ROS_CONTROL PLUGIN  -->
+
+
+<!--  ROS_CONTROL - PROGRAM  -->
+
+<node name="lidar_control" pkg="roscourse_2023_project_scene" type="lidar_processing.py" ns="project_robot"/>
 
 
 
