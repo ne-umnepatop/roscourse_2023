@@ -4,8 +4,9 @@ from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Float64
 
 
-add_vel = -5
-k=300
+ACCELERATION = -5
+K = 300
+BOOST = -30
 
 
 class ObstacleAvoidance:
@@ -30,14 +31,14 @@ class ObstacleAvoidance:
         self.left_wheel_controller.publish(joint_speed)
 
     def turn_left(self,a): 
-        rospy.logwarn(f'turning left, {k*a}')
-        self.right_wheel_controller.publish(self.joint_speed+add_vel)
+        rospy.logwarn(f'turning left, {K*a}')
+        self.right_wheel_controller.publish(self.joint_speed+ACCELERATION)
         self.left_wheel_controller.publish(-self.joint_speed)
 
     def turn_right(self,a):
-        rospy.logwarn(f'turning right, {k*a}')
+        rospy.logwarn(f'turning right, {K*a}')
         self.right_wheel_controller.publish(-self.joint_speed)
-        self.left_wheel_controller.publish(self.joint_speed+a*k*add_vel)
+        self.left_wheel_controller.publish(self.joint_speed+a*K*ACCELERATION)
 
     def lidar_callback(self, data):
         # distance_threshold = 2.0  
@@ -47,8 +48,8 @@ class ObstacleAvoidance:
             self.turn_left(self.obstacle_distance_threshold-data.ranges[-1])
         else:
             if data.ranges[5] > 3:
-                self.right_wheel_controller.publish(-30)
-                self.left_wheel_controller.publish(-30)
+                self.right_wheel_controller.publish(BOOST)
+                self.left_wheel_controller.publish(BOOST)
             else:
                 self.move_forward()
             
