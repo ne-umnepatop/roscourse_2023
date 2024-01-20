@@ -4,8 +4,9 @@ from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Float64
 
 
+add_vel = -5
+k=300
 
-add_vel = 5
 
 class ObstacleAvoidance:
     def __init__(self):
@@ -16,38 +17,40 @@ class ObstacleAvoidance:
         self.right_wheel_controller = rospy.Publisher('/project_robot/right_wheel_controller/command', Float64, queue_size=1)
         self.left_wheel_controller = rospy.Publisher('/project_robot/left_wheel_controller/command', Float64, queue_size=1)
 
-        self.max_linear_speed = 0.5  # max linear speed
-        self.max_angular_speed = 1.0  # max angular speed
-        self.joint_speed = 20.0 
+        self.joint_speed = -20.0 
         self.obstacle_distance_threshold = 0.7
 
     def move_forward(self):
-        self.right_wheel_controller.publish(-self.joint_speed)
-        self.left_wheel_controller.publish(-self.joint_speed)
+        self.right_wheel_controller.publish(self.joint_speed)
+        self.left_wheel_controller.publish(self.joint_speed)
 
     def move_back(self):
         joint_speed = 4.0  
         self.right_wheel_controller.publish(joint_speed)
         self.left_wheel_controller.publish(joint_speed)
 
-    def turn_left(self): 
-        self.right_wheel_controller.publish(-self.joint_speed-add_vel)
-        self.left_wheel_controller.publish(self.joint_speed)
+    def turn_left(self,a): 
+        rospy.logwarn(f'turning left, {k*a}')
+        self.right_wheel_controller.publish(self.joint_speed+add_vel)
+        self.left_wheel_controller.publish(-self.joint_speed)
 
-    def turn_right(self):
-        self.right_wheel_controller.publish(self.joint_speed)
-        self.left_wheel_controller.publish(-self.joint_speed-add_vel)
+    def turn_right(self,a):
+        rospy.logwarn(f'turning right, {k*a}')
+        self.right_wheel_controller.publish(-self.joint_speed)
+        self.left_wheel_controller.publish(self.joint_speed+a*k*add_vel)
 
     def lidar_callback(self, data):
         # distance_threshold = 2.0  
         if data.ranges[0] < self.obstacle_distance_threshold:
-            self.turn_right()
-        # elif data.ranges[4] < self.obstacle_distance_threshold:
-        #     self.move_back()        
+            self.turn_right(self.obstacle_distance_threshold-data.ranges[0])      
         elif data.ranges[-1] < self.obstacle_distance_threshold:
-            self.turn_left()
+            self.turn_left(self.obstacle_distance_threshold-data.ranges[-1])
         else:
-            self.move_forward()
+            if data.ranges[5] > 3:
+                self.right_wheel_controller.publish(-30)
+                self.left_wheel_controller.publish(-30)
+            else:
+                self.move_forward()
             
 
 def main():
