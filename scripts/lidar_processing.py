@@ -37,17 +37,15 @@ class ObstacleAvoidance:
 
     def lidar_callback(self, data):
         distance_threshold = 2.0  
-        if data.ranges[0] < distance_threshold:
+        if data.ranges[0] == "inf":
+            self.move_forward()
+        elif data.ranges[0] < distance_threshold:
             rospy.loginfo("Object detected in laser zone!")
             self.turn_left()
         else:
             rospy.loginfo("No object detected in laser zone.")
             self.move_forward()
             
-
-
-
-
 
 def main():
     try:
@@ -58,4 +56,5 @@ def main():
 
 
 if __name__ == '__main__':
+    rospy.logwarn("TEST_STIRNG!")
     main()
