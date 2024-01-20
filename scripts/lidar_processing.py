@@ -6,7 +6,7 @@ from std_msgs.msg import Float64
 
 # Прикрутить Линейное управление скоростью? ?
 PREDEL = 0.1
-
+acssel = 0.5
 class ObstacleAvoidance:
     def __init__(self):
         rospy.init_node('lidar_processing_node', anonymous=True)
@@ -23,12 +23,13 @@ class ObstacleAvoidance:
 
     def move_forward(self):
         joint_speed = 10.0  
-        self.right_wheel_controller.publish(-joint_speed)
-        self.left_wheel_controller.publish(-joint_speed)
+        self.right_wheel_controller.publish(joint_speed)
+        self.left_wheel_controller.publish(joint_speed)
 
     def turn_left(self):
         joint_speed = 10.0  
-        self.right_wheel_controller.publish(joint_speed)
+        
+        self.right_wheel_controller.publish(joint_speed+acssel)
         self.left_wheel_controller.publish(-joint_speed)
 
     def turn_right(self):
