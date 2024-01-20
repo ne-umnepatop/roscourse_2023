@@ -30,6 +30,10 @@
  <!--  ROS_CONTROL PLUGIN  -->
 
 
+  <rosparam file="$(find roscourse_2023_project_scene)/config/diff_control.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+  output="screen" args="left_wheel_controller right_wheel_controller joint_state_controller --timeout 60" ns="project_robot"/>
+
 <!--  ROS_CONTROL - PROGRAM  -->
 
 <node name="lidar_control" pkg="roscourse_2023_project_scene" type="lidar_processing.py" ns="project_robot"/>
