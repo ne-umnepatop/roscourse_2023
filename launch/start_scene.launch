@@ -6,12 +6,16 @@
   <arg name="x" default="0"/>
   <arg name="y" default="0"/>
   <arg name="z" default="-0.2"/>
+  
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+  <arg name="rviz_conf_file" default="$(find my_robot_simulation_control)/urdf/rviz_conf.rviz" />
+
 
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="40.0" />
   </node>
+  
 
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
