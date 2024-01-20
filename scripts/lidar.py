@@ -5,9 +5,9 @@ from std_msgs.msg import Float64
 
 
 # Прикрутить Линейное управление скоростью? ?
-PREDEL = 0.1
-ACSSEL = 0.5
-
+LIMIT = 0.5
+ACSSELERATION = -5
+JOINT_SPEED = -10.0
 
 class ObstacleAvoidance:
     def __init__(self):
@@ -23,45 +23,46 @@ class ObstacleAvoidance:
 
         self.max_linear_speed = 0.5  # max linear speed
         self.max_angular_speed = 1.0  # max angular speed
-        self.joint_speed = 1.0
+        self.JOINT_SPEED = 1.0
         self.obstacle_distance_threshold = 0.5
 
     def move_forward(self):
-        joint_speed = 10.0
-        self.right_wheel_controller.publish(joint_speed)
-        self.left_wheel_controller.publish(joint_speed)
+        
+        self.right_wheel_controller.publish(JOINT_SPEED)
+        self.left_wheel_controller.publish(JOINT_SPEED)
 
     def turn_left(self):
-        joint_speed = 10.0
-        self.right_wheel_controller.publish(joint_speed+ACSSEL)
-        self.left_wheel_controller.publish(joint_speed)
+        
+        self.right_wheel_controller.publish(JOINT_SPEED+ACSSELERATION)
+        self.left_wheel_controller.publish(JOINT_SPEED)
 
     def turn_right(self):
-        joint_speed = 10.0
-        self.right_wheel_controller.publish(-joint_speed)
-        self.left_wheel_controller.publish(joint_speed+ACSSEL)
+        
+        self.right_wheel_controller.publish(-JOINT_SPEED)
+        self.left_wheel_controller.publish(JOINT_SPEED+ACSSELERATION)
 
-    def is_there_a_wall(self, data):
+    def is_wall(self, data):
         # подразумеваю data.ranges[0] за левое а data.ranges[1] за растсояние от правой стены
-        rasstoyanie = (data.ranges[0]+data.ranges[1])/2
+        from_right_wall = data.ranges[0]
+        from_left_wall = data.ranges[-1]
+        if from_right_wall >= 2:
+            from_right_wall = 2
+        if from_left_wall >= 2:
+            from_left_wall = 2
+        rasstoyanie = (from_right_wall+from_left_wall)/2
         # расстояние от левой стены проверяю
-        if not (rasstoyanie-PREDEL < data.ranges[0] < rasstoyanie+PREDEL):
-            if rasstoyanie-PREDEL < data.ranges[0]:
-                self.turn_right()
-            else:
-                self.turn_left()
+
+        
+        if LIMIT > from_left_wall:
+            self.turn_right()
+        elif LIMIT > from_right_wall:
+            self.turn_left()
         else:
             self.move_forward()
 
     def lidar_callback(self, data):
-        self.is_there_a_wall(data)
-        # distance_threshold = 2.0
-        # if data.ranges[0] < distance_threshold:
-        #     rospy.loginfo("Object detected in laser zone!")
-        #     self.turn_left()
-        # else:
-        #     rospy.loginfo("No object detected in laser zone.")
-        #     self.move_forward()
+        self.is_wall(data)
+        self.move_forward()
 
 
 def main():
@@ -74,11 +75,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# <xacro:property name="pack" value="my_robot_simulation_control" />
-
-# <xacro:include filename="$(find ${pack})/urdf/materials.xacro" />
-# <xacro:include filename="$(find ${pack})/urdf/wheel.xacro" />
-# <xacro:include filename="$(find ${pack})/urdf/inertial.urdf.xacro" />
-# <xacro:include filename="$(find ${pack})/urdf/setup.gazebo" />
