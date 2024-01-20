@@ -1,72 +1,33 @@
 <?xml version="1.0"?>
 <robot>
-        <!-- SET COLORS FOR GAZEBO -->
     <gazebo reference="base_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="wheel_up_left_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Orange</material>
     </gazebo>
 
     <gazebo reference="wheel_up_right_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Orange</material>
     </gazebo>
 
         <gazebo reference="wheel_down_left_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="wheel_down_right_link">
-        <material>Gazebo/Blue</material>
-    </gazebo>
-
-    <gazebo reference="camera">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="lidar">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
-
-
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/project_robot</robotNamespace>
         </plugin>
-    </gazebo>
-
-        <gazebo reference="camera">
-        <sensor type="camera" name="camera_main">
-            <update_rate>30.0</update_rate>
-            <camera name="head">
-                <horizontal_fov>1.3962634</horizontal_fov>
-                <image>
-                    <width>960</width>
-                    <height>840</height>
-                    <format>R8G8B8</format>
-                    </image>
-                <clip>
-                    <near>0.02</near>
-                    <far>300</far>
-                </clip>
-            </camera>
-            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                <alwaysOn>true</alwaysOn>
-                <updateRate>0.0</updateRate>
-                <cameraName>cart_robot/camera_main</cameraName>
-                <imageTopicName>image_raw</imageTopicName>
-                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                <frameName>camera</frameName>
-                <hackBaseline>0.07</hackBaseline>
-                <distortionK1>0.0</distortionK1>
-                <distortionK2>0.0</distortionK2>
-                <distortionK3>0.0</distortionK3>
-                <distortionT1>0.0</distortionT1>
-                <distortionT2>0.0</distortionT2>
-            </plugin>
-        </sensor>
     </gazebo>
 
     <gazebo reference="lidar">
@@ -100,5 +61,4 @@
         </plugin>
         </sensor>
     </gazebo>
-
 </robot>

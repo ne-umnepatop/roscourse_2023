@@ -5,19 +5,19 @@
 
         <link name='wheel_${side}_link'>
             <visual name='wheel_${side}_visual'>
-            <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 1.57 0"/>
+                <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
                 <geometry>
                     <cylinder length="${(0.1)/4}" radius="${0.15/2}"/>
                 </geometry>
-                <material name="red"/>
+                <material name="orange"/>
             </visual>
 
-            <xacro:inertial_cylinder mass="5" length="0.5" radius="0.25">
-                <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 1.57 0"/>
+            <xacro:inertial_cylinder mass="5" length="${(0.1)/4}" radius="${0.15/2}">
+                <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
             </xacro:inertial_cylinder>
 
             <collision>
-               <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 1.57 0"/>
+               <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
                 <geometry>
                     <cylinder length="${(0.1)/4}" radius="${0.15/2}"/>
                 </geometry>
