@@ -13,11 +13,11 @@
     </gazebo>
 
         <gazebo reference="wheel_down_left_link">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/Orange</material>
     </gazebo>
 
     <gazebo reference="wheel_down_right_link">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/Orange</material>
     </gazebo>
 
     <gazebo reference="lidar">
