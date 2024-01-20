@@ -2,9 +2,15 @@
 
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:property name="pack" value="roscourse_2023_project_scene" />
 
-  <xacro:include filename="$(find roscourse_2023_project_scene)/models/diff_drive_robot/urdf/diff_drive_robot.gazebo" />
-  <xacro:include filename="$(find roscourse_2023_project_scene)/models/diff_drive_robot/urdf/materials.xacro" />
+  <!-- <xacro:include filename="$(find ${pack})/urdf/materials.xacro" />
+  <xacro:include filename="$(find ${pack})/urdf/wheel.xacro" />
+  <xacro:include filename="$(find ${pack})/urdf/inertial.urdf.xacro" />
+  <xacro:include filename="$(find ${pack})/urdf/setup.gazebo" /> -->
+
+  <xacro:include filename="$(find ${pack})/models/diff_drive_robot/urdf/diff_drive_robot.gazebo" />
+  <xacro:include filename="$(find ${pack})/models/diff_drive_robot/urdf/materials.xacro" />
 
 
 
