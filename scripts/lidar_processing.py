@@ -4,7 +4,8 @@ from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Float64
 
 
-# Прикрутить Линейное управление скоростью? ?
+
+add_vel = 5
 
 class ObstacleAvoidance:
     def __init__(self):
@@ -17,33 +18,35 @@ class ObstacleAvoidance:
 
         self.max_linear_speed = 0.5  # max linear speed
         self.max_angular_speed = 1.0  # max angular speed
-        self.joint_speed = 1.0 
-        self.obstacle_distance_threshold = 0.5
+        self.joint_speed = 20.0 
+        self.obstacle_distance_threshold = 0.7
 
     def move_forward(self):
-        joint_speed = 10.0  
-        self.right_wheel_controller.publish(-joint_speed)
-        self.left_wheel_controller.publish(-joint_speed)
+        self.right_wheel_controller.publish(-self.joint_speed)
+        self.left_wheel_controller.publish(-self.joint_speed)
 
-    def turn_left(self):
-        joint_speed = 10.0  
+    def move_back(self):
+        joint_speed = 4.0  
         self.right_wheel_controller.publish(joint_speed)
-        self.left_wheel_controller.publish(-joint_speed)
-
-    def turn_right(self):
-        joint_speed = 10.0  
-        self.right_wheel_controller.publish(-joint_speed)
         self.left_wheel_controller.publish(joint_speed)
 
+    def turn_left(self): 
+        self.right_wheel_controller.publish(-self.joint_speed-add_vel)
+        self.left_wheel_controller.publish(self.joint_speed)
+
+    def turn_right(self):
+        self.right_wheel_controller.publish(self.joint_speed)
+        self.left_wheel_controller.publish(-self.joint_speed-add_vel)
+
     def lidar_callback(self, data):
-        distance_threshold = 2.0  
-        if data.ranges[0] == "inf":
-            self.move_forward()
-        elif data.ranges[0] < distance_threshold:
-            rospy.loginfo("Object detected in laser zone!")
+        # distance_threshold = 2.0  
+        if data.ranges[0] < self.obstacle_distance_threshold:
+            self.turn_right()
+        # elif data.ranges[4] < self.obstacle_distance_threshold:
+        #     self.move_back()        
+        elif data.ranges[-1] < self.obstacle_distance_threshold:
             self.turn_left()
         else:
-            rospy.loginfo("No object detected in laser zone.")
             self.move_forward()
             
 
