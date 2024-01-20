@@ -8,24 +8,23 @@
 <xacro:include filename="$(find ${pack})/models/project_robot/urdf/inertial.urdf.xacro" />
 <xacro:include filename="$(find ${pack})/models/project_robot/urdf/setup.gazebo" />
 
-<!-- robot_arm BUT NOW cart_robot -->
 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
 
     <link name="base_footprint"/>
+
     <joint name="base_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0.0102"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
         <parent link="base_footprint"/>
         <child link="base_link"/>
     </joint>
 
     <link name='base_link'>
-
         <visual name='base_visual'>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <geometry>
-        <box size="0.2 0.18 0.12 "/>
-        </geometry>
-        <material name="blue"/>
+            <geometry>
+                <box size="0.2 0.18 0.12 "/>
+            </geometry>
+            <material name="black"/>
         </visual>
         
         <xacro:inertial_box mass="10" x="0.2" y="0.18" z="0.12" >
@@ -47,11 +46,12 @@
             <geometry>
                 <box size=".05 .05 .05"/>
             </geometry>
-            <material name="red"/>
+            <material name="black"/>
         </visual>
     </link>
+
     <joint name="lidar_joint" type="fixed">
-        <origin xyz="0 0.10 0.20" rpy="0 0 1.570796"/>
+        <origin xyz="0 0.10 0.20" rpy="0 0 ${pi/2}"/>
         <child link="lidar"/>
         <parent link="base_link"/>
     </joint>

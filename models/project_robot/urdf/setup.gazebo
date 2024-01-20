@@ -1,35 +1,28 @@
 <?xml version="1.0"?>
 <robot>
-        <!-- SET COLORS FOR GAZEBO -->
     <gazebo reference="base_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="wheel_up_left_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Orange</material>
     </gazebo>
 
     <gazebo reference="wheel_up_right_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Orange</material>
     </gazebo>
 
         <gazebo reference="wheel_down_left_link">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="wheel_down_right_link">
-        <material>Gazebo/Blue</material>
-    </gazebo>
-
-    <gazebo reference="camera">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="lidar">
-        <material>Gazebo/Blue</material>
+        <material>Gazebo/Black</material>
     </gazebo>
-
-
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -68,5 +61,4 @@
         </plugin>
         </sensor>
     </gazebo>
-
 </robot>
