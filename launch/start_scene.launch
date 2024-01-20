@@ -25,7 +25,7 @@
 
 
   <node name="my_robot_model_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
-   args="-urdf -param robot_description -model my_robot_model -x $(arg x) -y $(arg y) -z $(arg z)" respawn="false"/>
+   args="-urdf -param robot_description -model my_robot_model -x $(arg x) -y $(arg y) -z $(arg z) -Y 1.57" respawn="false"/>
 
  <!--  ROS_CONTROL PLUGIN  -->
 
