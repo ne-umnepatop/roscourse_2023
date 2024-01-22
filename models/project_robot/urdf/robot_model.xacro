@@ -15,16 +15,16 @@
     <joint name="base_joint" type="fixed">
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <parent link="base_footprint"/>
-        <child link="base_link"/>
+        <child link="base"/>
     </joint>
 
-    <link name='base_link'>
+    <link name='base'>
         <visual name='base_visual'>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
                 <box size="0.2 0.18 0.12 "/>
             </geometry>
-            <material name="black"/>
+            <material name="orange"/>
         </visual>
         
         <xacro:inertial_box mass="10" x="0.2" y="0.18" z="0.12" >
@@ -46,14 +46,14 @@
             <geometry>
                 <box size=".05 .05 .05"/>
             </geometry>
-            <material name="black"/>
+            <material name="red"/>
         </visual>
     </link>
 
     <joint name="lidar_joint" type="fixed">
-        <origin xyz="0 0.10 0.20" rpy="0 0 ${pi/2}"/>
+        <origin xyz="0 0.10 0.08" rpy="0 0 ${pi/2}"/>
         <child link="lidar"/>
-        <parent link="base_link"/>
+        <parent link="base"/>
     </joint>
 
     <xacro:wheel side="up_left" x="0.1" y="0.09" z="0.0" sign="1"/> 

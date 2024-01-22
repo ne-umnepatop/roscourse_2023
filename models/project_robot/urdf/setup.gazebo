@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <robot>
-    <gazebo reference="base_link">
-        <material>Gazebo/Black</material>
+    <gazebo reference="base">
+        <material>Gazebo/Orange</material>
     </gazebo>
 
     <gazebo reference="wheel_up_left_link">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="wheel_up_right_link">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
         <gazebo reference="wheel_down_left_link">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="wheel_down_right_link">
-        <material>Gazebo/Orange</material>
+        <material>Gazebo/Black</material>
     </gazebo>
 
     <gazebo reference="lidar">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/Red</material>
     </gazebo>
 
     <gazebo>
