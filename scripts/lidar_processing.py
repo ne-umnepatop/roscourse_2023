@@ -64,5 +64,5 @@ def main():
 
 
 if __name__ == '__main__':
-    rospy.logwarn("TEST_STIRNG!")
+    rospy.logwarn("TEST_STRING!")
     main()
