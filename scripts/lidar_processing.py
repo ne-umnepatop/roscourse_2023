@@ -6,8 +6,8 @@ from std_msgs.msg import Float64
 BASIC_SPEED = -21
 ACCELERATION = -5
 K = 300
-BOOST = -35
-THRESHOLD_DISTANCE = 0.72
+BOOST = -34
+THRESHOLD_DISTANCE = 0.71
 
 
 
@@ -33,22 +33,35 @@ class ObstacleAvoidance:
 
     def turn_left(self,a): 
         rospy.logwarn(f'turning left, {K*a}')
-        self.right_wheel_controller.publish(BASIC_SPEED+ACCELERATION)
+        self.right_wheel_controller.publish(BASIC_SPEED+a*K*ACCELERATION)
+        # self.right_wheel_controller.publish(BASIC_SPEED+ACCELERATION)
         self.left_wheel_controller.publish(-BASIC_SPEED)
+        # if K*a>10:
+        #     self.left_wheel_controller.publish(0)
+        #     self.left_wheel_controller.publish(-BASIC_SPEED)
+        # else:
+        #     self.left_wheel_controller.publish(BASIC_SPEED)
 
     def turn_right(self,a):
         rospy.logwarn(f'turning right, {K*a}')
+        # if K*a>10:
+        #     self.left_wheel_controller.publish(0)
+        #     self.right_wheel_controller.publish(-BASIC_SPEED)
+        # else:
+        #     self.right_wheel_controller.publish(BASIC_SPEED)
         self.right_wheel_controller.publish(-BASIC_SPEED)
         self.left_wheel_controller.publish(BASIC_SPEED+a*K*ACCELERATION)
+        # self.left_wheel_controller.publish(BASIC_SPEED+ACCELERATION)
 
     def lidar_callback(self, data):
-        # distance_threshold = 2.0  
-        if data.ranges[0] < THRESHOLD_DISTANCE:
+        if sum(data.ranges)< THRESHOLD_DISTANCE*len(data.ranges):
+            self.move_back()
+        elif data.ranges[0] < THRESHOLD_DISTANCE:
             self.turn_right(THRESHOLD_DISTANCE-data.ranges[0])      
         elif data.ranges[-1] < THRESHOLD_DISTANCE:
             self.turn_left(THRESHOLD_DISTANCE-data.ranges[-1])
         else:
-            if data.ranges[5] > 3:
+            if data.ranges[5] > 3 and data.ranges[3] > 3:
                 self.right_wheel_controller.publish(BOOST)
                 self.left_wheel_controller.publish(BOOST)
             else:
@@ -57,6 +70,7 @@ class ObstacleAvoidance:
 
 def main():
     try:
+
         ObstacleAvoidance()
         rospy.spin()
     except rospy.ROSInterruptException:
