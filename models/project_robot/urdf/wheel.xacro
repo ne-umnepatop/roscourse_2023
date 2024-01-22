@@ -3,7 +3,7 @@
 
     <xacro:macro name="wheel" params="side x y z sign">
 
-        <link name='wheel_${side}_link'>
+        <link name='wheel_${side}'>
             <visual name='wheel_${side}_visual'>
                 <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
                 <geometry>
@@ -31,7 +31,7 @@
             <limit effort="100" velocity="50"/>
             <joint_properties damping="0.5" friction="0.1"/>
 
-            <child link="wheel_${side}_link"/>
+            <child link="wheel_${side}"/>
             <parent link="base"/>
         </joint>
 
