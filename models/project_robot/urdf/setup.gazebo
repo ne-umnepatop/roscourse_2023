@@ -4,19 +4,19 @@
         <material>Gazebo/Orange</material>
     </gazebo>
 
-    <gazebo reference="wheel_up_left_link">
+    <gazebo reference="wheel_up_left">
         <material>Gazebo/Black</material>
     </gazebo>
 
-    <gazebo reference="wheel_up_right_link">
+    <gazebo reference="wheel_up_right">
         <material>Gazebo/Black</material>
     </gazebo>
 
-        <gazebo reference="wheel_down_left_link">
+        <gazebo reference="wheel_down_left">
         <material>Gazebo/Black</material>
     </gazebo>
 
-    <gazebo reference="wheel_down_right_link">
+    <gazebo reference="wheel_down_right">
         <material>Gazebo/Black</material>
     </gazebo>
 
