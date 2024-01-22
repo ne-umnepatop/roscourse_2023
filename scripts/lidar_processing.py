@@ -3,14 +3,12 @@ import rospy
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Float64
 
-add_vel = 6  # no more daddy please
+add_vel = 6 # no more daddy please
 
 
 def round_int(x):
-    if x in [float("-inf"), float("inf")]:
-        return 3
-    else:
-        return int(round(x))
+    if x in [float("-inf"),float("inf")]: return 3
+    else: return int(round(x))
 
 
 class ObstacleAvoidance:
@@ -25,7 +23,7 @@ class ObstacleAvoidance:
         self.left_wheel_controller = rospy.Publisher(
             '/project_robot/left_wheel_controller/command', Float64, queue_size=1)
 
-        self.joint_speed = 25.0
+        self.joint_speed = 25.0 
         self.obstacle_distance_threshold = 0.8
 
     def move_forward(self, speed):
