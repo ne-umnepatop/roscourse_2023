@@ -8,7 +8,7 @@ BASIC_SPEED = 25.0
 THRESHOLD_DISTANCE  = 0.8
 BOOST = 35
 
-ns = 'project_robot_368201'
+ns = 'project_robot_888888'
 
 def round_int(x):
     if x in [float('-inf'),float('inf')]: return 3

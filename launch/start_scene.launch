@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <arg name="nas" default="project_robot_368201"/>
+  <arg name="nas" default="project_robot_888888"/>
   <param name="robot_description" command="xacro '$(find roscourse_2023_project_scene)/models/project_robot/urdf/robot_model.xacro'"/>
   <!-- Robot pose -->
   <arg name="x" default="0"/>
