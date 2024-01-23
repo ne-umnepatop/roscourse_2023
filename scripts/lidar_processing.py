@@ -5,23 +5,24 @@ from std_msgs.msg import Float64
 
 add_vel = 6 # no more daddy please
 
+ns = 'project_robot_368201'
 
 def round_int(x):
-    if x in [float("-inf"),float("inf")]: return 3
+    if x in [float('-inf'),float('inf')]: return 3
     else: return int(round(x))
 
 
 class ObstacleAvoidance:
     def __init__(self):
         rospy.init_node('lidar_processing_node', anonymous=True)
-        rospy.Subscriber("/project_robot/lidar_main",
+        rospy.Subscriber(f'/{ns}/lidar_main',
                          LaserScan, self.lidar_callback)
 
         # Publish joint velocity commands for the wheels
         self.right_wheel_controller = rospy.Publisher(
-            '/project_robot/right_wheel_controller/command', Float64, queue_size=1)
+            f'/{ns}/right_wheel_controller/command', Float64, queue_size=1)
         self.left_wheel_controller = rospy.Publisher(
-            '/project_robot/left_wheel_controller/command', Float64, queue_size=1)
+            f'/{ns}/left_wheel_controller/command', Float64, queue_size=1)
 
         self.joint_speed = 25.0 
         self.obstacle_distance_threshold = 0.8
@@ -45,7 +46,7 @@ class ObstacleAvoidance:
 
     def lidar_callback(self, data):
         rospy.logwarn(
-            f"dist: left:{data.ranges[-1]} mid:{data.ranges[4]} right:{data.ranges[0]}")
+            f'dist: left:{data.ranges[-1]} mid:{data.ranges[4]} right:{data.ranges[0]}')
 
         if abs(data.ranges[4]) > 3 and round_int(data.ranges[0]) >= 1 and round_int(data.ranges[-1]) >= 1:
             self.move_forward(35)
