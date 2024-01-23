@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+  <arg name="nas" default="project_robot_888888"/>
   <param name="robot_description" command="xacro '$(find roscourse_2023_project_scene)/models/project_robot/urdf/robot_model.xacro'"/>
   <!-- Robot pose -->
   <arg name="x" default="0"/>
@@ -8,7 +9,7 @@
 
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="40.0" />
-    <remap from="/joint_states" to="/project_robot/joint_states" />
+    <remap from="/joint_states" to="/$(arg nas)/joint_states" />
   </node>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -26,11 +27,12 @@
  <!--  ROS_CONTROL PLUGIN  -->
   <rosparam file="$(find roscourse_2023_project_scene)/config/diff_control.yaml" command="load"/>
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-  output="screen" args="left_wheel_controller right_wheel_controller joint_state_controller --timeout 60" ns="project_robot"/>
+  output="screen" args="left_wheel_controller right_wheel_controller joint_state_controller --timeout 60" ns="$(arg nas)"/>
 
 <!--  ROS_CONTROL - PROGRAM  -->
-<node name="lidar_control" pkg="roscourse_2023_project_scene" type="lidar_processing.py" ns="project_robot"/>
+<node name="lidar_control" pkg="roscourse_2023_project_scene" type="lidar_processing.py" ns="$(arg nas)"/>
 
-  <arg name="rviz_conf_file" default="$(find roscourse_2023_project_scene)/models/project_robot/urdf/rviz_conf.rviz" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf_file)" />
+  <!-- <arg name="rviz_conf_file" default="$(find roscourse_2023_project_scene)/models/project_robot/urdf/rviz_conf.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf_file)" /> -->
+
 </launch>
