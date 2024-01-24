@@ -3,7 +3,7 @@
 
     <xacro:macro name="wheel" params="side x y z sign sign2">
 
-        <xacro:property name="pack" value="roscourse_2023_project_scene" />
+        <xacro:property name="pack" value="roscourse_2023_project_scene_368201" />
 
         <link name='wheel_${side}'>
 
@@ -22,7 +22,7 @@
             <collision>
                <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
                 <geometry>
-                    <cylinder length="${(0.1)/4}" radius="${0.15/2}"/>
+                    <cylinder length="${(0.1)/4}" radius="${0.17/2}"/>
                 </geometry>
             </collision>
 

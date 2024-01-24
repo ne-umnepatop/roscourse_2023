@@ -16,7 +16,7 @@
     </light>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-0.020571 0.165921 64.203 3.14159 1.57079 3.14159</pose>
+        <pose frame=''>-18.4292 -29.2602 22.1634 0 0.611643 1.0242</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -89,7 +89,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>../models/project_2023.dae</uri>
+              <uri>../models/track_2024.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -105,7 +105,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>../models/project_2023.dae</uri>
+              <uri>../models/track_2024.dae</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>

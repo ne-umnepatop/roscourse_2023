@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <robot>
-    <!-- <arg name="nas" default="project_robot_888888"/> -->
+
     <gazebo reference="base">
         <material>Gazebo/Orange</material>
     </gazebo>
@@ -28,7 +28,7 @@
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace>/project_robot_888888</robotNamespace>
+            <robotNamespace>/project_robot_368201</robotNamespace>
         </plugin>
     </gazebo>
        
@@ -58,7 +58,7 @@
             </noise>
         </ray>
         <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-            <topicName>project_robot_888888/lidar_main</topicName>
+            <topicName>project_robot_368201/lidar_main</topicName>
             <frameName>lidar</frameName>
         </plugin>
         </sensor>

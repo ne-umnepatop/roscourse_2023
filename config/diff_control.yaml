@@ -1,4 +1,4 @@
-project_robot_888888:
+project_robot_368201:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController

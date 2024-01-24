@@ -8,7 +8,7 @@ BASIC_SPEED = 25.0
 THRESHOLD_DISTANCE  = 0.8
 BOOST = 35
 
-ns = 'project_robot_888888'
+ns = 'project_robot_368201'
 
 def round_int(x):
     if x in [float('-inf'),float('inf')]: return 3
@@ -56,8 +56,8 @@ class ObstacleAvoidance:
             self.turn_right(data.ranges[0])
         elif data.ranges[-1] < THRESHOLD_DISTANCE :
             self.turn_left(data.ranges[-1])
-        elif sum(data.ranges) < THRESHOLD_DISTANCE *9:
-            self.move_back()
+        # elif data.ranges[0] < THRESHOLD_DISTANCE and data.ranges[-1] < THRESHOLD_DISTANCE:
+        #     self.move_back()
         else:
             self.move_forward(BASIC_SPEED)
 
