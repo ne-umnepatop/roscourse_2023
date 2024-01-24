@@ -15,14 +15,14 @@
                 <material name="black"/>
             </visual>
 
-            <xacro:inertial_cylinder mass="1" length="${(0.1)/4}" radius="${0.15/2}">
+            <xacro:inertial_cylinder mass="1" length="${(0.1)/4}" radius="${0.17/2}">
                 <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
             </xacro:inertial_cylinder>
 
             <collision>
                <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
                 <geometry>
-                    <cylinder length="${(0.1)/4}" radius="${0.15/2}"/>
+                    <cylinder length="${(0.1)/4}" radius="${0.17/2}"/>
                 </geometry>
             </collision>
 
